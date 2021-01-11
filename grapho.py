@@ -1,19 +1,23 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-#from matplotlib import style
+ADDRESS = "raspberrypi.local"
+PORT = 22
+USER = "pi"
+PASS = "chungus69"
+PATH = "cat ~/Documents/ads1115/text_data.txt"
+DEBUGF = 'data.txt'
 def animate(i):
     if(not debug):
         ssh = SSHClient()
         #print(ssh)
         ssh.set_missing_host_key_policy(AutoAddPolicy())
-        ssh.connect("raspberrypi.local", 22, "pi", "chungus69")
-        stdin, stdout, stderr = ssh.exec_command("cat ~/Documents/ads1115/text_data.txt")
+        ssh.connect(ADDRESS, PORT, USER, PASS)
+        stdin, stdout, stderr = ssh.exec_command(PATH)
         graphlines = stdout.readlines()                
     else:
- 
-
-        graph_data = open('data.txt','r').read()
+        graph_data = open(DEBUGF,'r').read()
         graphlines = graph_data.split('\n')
+        
     xs = []
     ys = []
     i = 0
